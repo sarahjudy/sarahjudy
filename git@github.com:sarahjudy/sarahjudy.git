@@ -1,7 +1,18 @@
-echo "# sarahjudy" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:sarahjudy/sarahjudy.git
-git push -u origin main
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+# Mock data for virtual phone numbers
+virtual_numbers = [
+    {'number': '+1234567890', 'country': 'USA', 'service_provider': 'Twilio'},
+    {'number': '+9876543210', 'country': 'UK', 'service_provider': 'Nexmo'},
+    {'number': '+1122334455', 'country': 'Canada', 'service_provider': 'Plivo'}
+]
+
+@app.route('/')
+def index():
+    return render_template('index.html', numbers=virtual_numbers)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
